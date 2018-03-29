@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
  * @description:
  */
 @Controller
-@RequestMapping("/authenticator")
 public class AuthenticatorController {
 
     @Autowired

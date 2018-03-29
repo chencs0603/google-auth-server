@@ -1,6 +1,5 @@
 package personal.chencs.practice.entity;
 
-import com.sun.java.swing.plaf.windows.WindowsBorders;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;

@@ -1,14 +1,13 @@
 package personal.chencs.practice.token;
 
-import org.apache.commons.codec.binary.Hex;
-import org.springframework.stereotype.Component;
-
 /**
+ * 时间型OTP实现
+ * 参考RFC6238
+ *
  * @author: chencs
  * @date: 2018/3/29
  * @description:
  */
-@Component
 public class DefaultTOTP extends DefaultToken implements TOTP {
 
     private int timeStep = 30;
@@ -21,6 +20,13 @@ public class DefaultTOTP extends DefaultToken implements TOTP {
         return result;
     }
 
+    /**
+     * 计算输入因子
+     *
+     * @param timeStep 时间步长，即周期
+     * @param offset 时间偏移（单位是周期）
+     * @return 输入因子
+     */
     protected byte[] getInfo(int timeStep, int offset) {
         long timestamp = System.currentTimeMillis();
         long timeNum = timestamp/timeStep/1000 + offset;

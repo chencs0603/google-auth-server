@@ -11,9 +11,11 @@ import org.apache.commons.codec.binary.Base32;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import personal.chencs.practice.entity.Authenticator;
 import personal.chencs.practice.repository.AuthenticatorRepository;
+import personal.chencs.practice.token.DefaultTOTP;
 import personal.chencs.practice.token.TOTP;
 
 import java.io.OutputStream;
@@ -42,6 +44,11 @@ public class AuthenticatorService {
 
     @Autowired
     private TOTP token;
+
+    @Bean
+    public TOTP getToken() {
+        return new DefaultTOTP();
+    }
 
     /**
      * 生成种子密钥，并以二维码形式返回

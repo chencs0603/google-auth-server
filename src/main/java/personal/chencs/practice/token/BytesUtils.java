@@ -1,6 +1,8 @@
 package personal.chencs.practice.token;
 
 /**
+ * byte数组工具类
+ *
  * @author: chencs
  * @date: 2018/3/29
  * @description:

@@ -3,7 +3,8 @@ package personal.chencs.practice.token;
 import org.apache.commons.codec.digest.HmacUtils;
 
 /**
- *
+ * hmac和truncate的默认实现
+ * 参考RFC4226
  *
  * @author: chencs
  * @date: 2018/3/29

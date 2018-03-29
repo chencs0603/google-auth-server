@@ -1,7 +1,8 @@
 package personal.chencs.practice.token;
 
 /**
- *
+ * 定义OTP计算的抽象流程
+ * OTP = truncate(hmac(info, secretKey))
  *
  * @author: chencs
  * @date: 2018/3/29
