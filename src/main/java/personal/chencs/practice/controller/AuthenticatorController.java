@@ -3,6 +3,7 @@ package personal.chencs.practice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import personal.chencs.practice.service.AuthenticatorService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +33,17 @@ public class AuthenticatorController {
         // 写入response
         response.setHeader("Content-Type", "image/png");
         tokenService.generateQrcode(username, response.getOutputStream());
+    }
+
+    @RequestMapping("/authenticate")
+    @ResponseBody
+    public String authenticate(String username, String password) {
+        boolean result = tokenService.authenticator(username, password);
+        if (result) {
+            return "认证成功";
+        } else {
+            return "认证失败";
+        }
     }
 
 }

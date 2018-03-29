@@ -11,4 +11,7 @@ import personal.chencs.practice.entity.Authenticator;
  * @description:
  */
 public interface AuthenticatorRepository extends JpaRepository<Authenticator, Long> {
+
+    Authenticator findByUsername(String username);
+
 }

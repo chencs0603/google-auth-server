@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import personal.chencs.practice.entity.Authenticator;
 import personal.chencs.practice.repository.AuthenticatorRepository;
+import personal.chencs.practice.token.TOTP;
 
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -37,7 +38,10 @@ public class AuthenticatorService {
     private static String IMAGE_FROMAT = "png";
 
     @Autowired
-    private AuthenticatorRepository tokenRepository;
+    private AuthenticatorRepository authenticatorRepository;
+
+    @Autowired
+    private TOTP token;
 
     /**
      * 生成种子密钥，并以二维码形式返回
@@ -53,7 +57,7 @@ public class AuthenticatorService {
         // 生成二维码，以字节流输出
         createQrcode(content, outputStream);
         // 保存用户信息
-        tokenRepository.save(new Authenticator(username, secretKey));
+        authenticatorRepository.save(new Authenticator(username, secretKey));
     }
 
     /**
@@ -64,6 +68,27 @@ public class AuthenticatorService {
      * @return 认证成功返回true，否则返回false
      */
     public boolean authenticator(String username, String password) {
+        Authenticator authenticator = authenticatorRepository.findByUsername(username);
+        if (null == authenticator) {
+            return false;
+        }
+        String base32SecretKey = authenticator.getSecretKey();
+        byte[] secretKey = new Base32().decode(base32SecretKey);
+
+        String validPassword = token.generateOTP(0, secretKey);
+        if (validPassword.equals(password)) {
+            return true;
+        }
+        for (int i = 1; i < 2; i++) {
+            validPassword = token.generateOTP(i, secretKey);
+            if (validPassword.equals(password)) {
+                return true;
+            }
+            validPassword = token.generateOTP(-i, secretKey);
+            if (validPassword.equals(password)) {
+                return true;
+            }
+        }
 
         return false;
     }
