@@ -3,7 +3,7 @@ package personal.chencs.practice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import personal.chencs.practice.service.TokenService;
+import personal.chencs.practice.service.AuthenticatorService;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletResponse;
  * @description:
  */
 @Controller
-@RequestMapping("/token")
-public class TokenController {
+@RequestMapping("/authenticator")
+public class AuthenticatorController {
 
     @Autowired
-    private TokenService tokenService;
+    private AuthenticatorService tokenService;
 
     @RequestMapping("/generateQrcode")
     public void generateQrcode(HttpServletResponse response, String username) throws Exception {

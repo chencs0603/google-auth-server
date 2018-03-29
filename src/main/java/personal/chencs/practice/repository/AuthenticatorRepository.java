@@ -1,14 +1,14 @@
 package personal.chencs.practice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import personal.chencs.practice.entity.Token;
+import personal.chencs.practice.entity.Authenticator;
 
 /**
- * 令牌DAO接口
+ * 认证器DAO接口
  *
  * @author: chencs
  * @date: 2018/3/28
  * @description:
  */
-public interface TokenRepository extends JpaRepository<Token, Long> {
+public interface AuthenticatorRepository extends JpaRepository<Authenticator, Long> {
 }

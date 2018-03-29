@@ -10,14 +10,14 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * 令牌实体
+ * 认证器实体
  *
  * @author: chencs
  * @date: 2018/3/28
  * @description:
  */
 @Entity
-public class Token {
+public class Authenticator {
 
     @Id
     @GeneratedValue
@@ -29,10 +29,10 @@ public class Token {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time;
 
-    public Token() {
+    public Authenticator() {
     }
 
-    public Token(String username, String secretKey) {
+    public Authenticator(String username, String secretKey) {
         this.username = username;
         this.secretKey = secretKey;
         this.time = new Date();
@@ -40,7 +40,7 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token{" +
+        return "Authenticator{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", secretKey='" + secretKey + '\'' +

@@ -12,22 +12,22 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import personal.chencs.practice.entity.Token;
-import personal.chencs.practice.repository.TokenRepository;
+import personal.chencs.practice.entity.Authenticator;
+import personal.chencs.practice.repository.AuthenticatorRepository;
 
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 令牌业务层接口
+ * 认证器业务层接口
  *
  * @author: chencs
  * @date: 2018/3/28
  * @description:
  */
 @Service
-public class TokenService {
+public class AuthenticatorService {
 
     // TODO：日志记录、异常处理
 
@@ -37,7 +37,7 @@ public class TokenService {
     private static String IMAGE_FROMAT = "png";
 
     @Autowired
-    private TokenRepository tokenRepository;
+    private AuthenticatorRepository tokenRepository;
 
     /**
      * 生成种子密钥，并以二维码形式返回
@@ -53,7 +53,7 @@ public class TokenService {
         // 生成二维码，以字节流输出
         createQrcode(content, outputStream);
         // 保存用户信息
-        tokenRepository.save(new Token(username, secretKey));
+        tokenRepository.save(new Authenticator(username, secretKey));
     }
 
     /**
@@ -64,6 +64,7 @@ public class TokenService {
      * @return 认证成功返回true，否则返回false
      */
     public boolean authenticator(String username, String password) {
+
         return false;
     }
 

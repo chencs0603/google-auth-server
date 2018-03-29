@@ -1,6 +1,6 @@
 server:
   port: 8080
-  context-path: /google-authenticator-server
+  context-path: /google-auth-server
 
 spring:
   jpa:
