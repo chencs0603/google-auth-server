@@ -3,6 +3,7 @@ package personal.chencs.practice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import personal.chencs.practice.service.AuthenticatorService;
 
@@ -21,7 +22,7 @@ public class AuthenticatorController {
     @Autowired
     private AuthenticatorService tokenService;
 
-    @RequestMapping("/generateQrcode")
+    @RequestMapping(value = "/generateQrcode", method = RequestMethod.POST)
     public void generateQrcode(HttpServletResponse response, String username) throws Exception {
         // TODO:异常情况处理，检测用户名输入不合法
 
@@ -34,7 +35,7 @@ public class AuthenticatorController {
         tokenService.generateQrcode(username, response.getOutputStream());
     }
 
-    @RequestMapping("/authenticate")
+    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     @ResponseBody
     public String authenticate(String username, String password) {
         boolean result = tokenService.authenticator(username, password);
