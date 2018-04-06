@@ -1,5 +1,7 @@
 package personal.chencs.practice.token;
 
+import personal.chencs.util.BytesUtils;
+
 /**
  * 时间型OTP实现
  * 参考RFC6238

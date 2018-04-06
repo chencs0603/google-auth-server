@@ -1,5 +1,7 @@
 package personal.chencs.practice.token;
 
+import personal.chencs.util.BytesUtils;
+
 /**
  * 事件型OTP实现
  * 参考RFC4226
