@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+
+    <p><h2>注册</h2>
+    <form action="/google-auth-server/generateQrcode" method="post">
+        用户名：<input type="text" name="username">
+        <input type="submit" value="注册认证器">
+    </form>
+
+    <p><h2>认证</h2>
+    <form action="/google-auth-server/authenticate" method="post">
+        用户名：<input type="text" name="username">
+        动态口令：<input type="text" name="password">
+        <input type="submit" value="认证">
+    </form>
+</body>
+</html>
