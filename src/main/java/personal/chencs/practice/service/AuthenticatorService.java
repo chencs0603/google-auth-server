@@ -10,6 +10,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.apache.commons.codec.binary.Base32;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
@@ -56,9 +57,12 @@ public class AuthenticatorService {
      * @param username 用户名
      * @return 二维码的字节流
      */
-    public void generateQrcode(String username, OutputStream outputStream) {
-        // 生成种子密钥
-        String secretKey = generateSecretKey(username);
+    public void generateQrcode(String username, String hexSecretKey, OutputStream outputStream) {
+        // 种子密钥为空，则随机生成种子密钥
+        if (StringUtils.isBlank(hexSecretKey)) {
+            hexSecretKey = generateSecretKey();
+        }
+        String secretKey = encodeSecretKey(hexSecretKey);
         // google authenticator客户端可以识别的字符串（包含用户名和种子）
         String content = generateContent4Qrcode(username, secretKey);
         // 生成二维码，以字节流输出
@@ -103,12 +107,22 @@ public class AuthenticatorService {
     /**
      * 生成种子密钥，以base32编码的字符串输出
      *
-     * @param username 用户名
      * @return 种子密钥的base32编码
      */
-    private String generateSecretKey(String username) {
+    private String generateSecretKey() {
         // 产生种子密钥的16进制字符串
         String hexSecretKey = RandomStringUtils.random(20, "0123456789ABCDEF");
+
+        return hexSecretKey;
+    }
+
+    /**
+     * 16进制字符串转成成base32
+     *
+     * @param hexSecretKey 16进制字符串
+     * @return base32字符串
+     */
+    private String encodeSecretKey(String hexSecretKey) {
         try {
             // 种子密钥的16进制解码
             byte[] secretKey = Hex.decodeHex(hexSecretKey.toCharArray());

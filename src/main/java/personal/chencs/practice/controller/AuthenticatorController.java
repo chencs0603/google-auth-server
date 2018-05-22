@@ -23,7 +23,7 @@ public class AuthenticatorController {
     private AuthenticatorService tokenService;
 
     @RequestMapping(value = "/generateQrcode", method = RequestMethod.POST)
-    public void generateQrcode(HttpServletResponse response, String username) throws Exception {
+    public void generateQrcode(HttpServletResponse response, String username, String hexSecretKey) throws Exception {
         // TODO:异常情况处理，检测用户名输入不合法
 
         // 控制浏览器不要缓存
@@ -32,7 +32,7 @@ public class AuthenticatorController {
         response.setHeader("Pragma", "no-cache");
         // 写入response
         response.setHeader("Content-Type", "image/png");
-        tokenService.generateQrcode(username, response.getOutputStream());
+        tokenService.generateQrcode(username, hexSecretKey, response.getOutputStream());
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
