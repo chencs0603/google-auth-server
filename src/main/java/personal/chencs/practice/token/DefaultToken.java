@@ -10,7 +10,7 @@ import org.apache.commons.codec.digest.HmacUtils;
  * @date: 2018/3/29
  * @description:
  */
-public class DefaultToken extends AbstractToken {
+public class DefaultToken extends AbstractOTP {
 
     @Override
     protected byte[] hmac(byte[] info, byte[] secretKey, String algorithmName) {

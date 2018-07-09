@@ -8,7 +8,7 @@ package personal.chencs.practice.token;
  * @date: 2018/3/29
  * @description:
  */
-public abstract class AbstractToken implements Token {
+public abstract class AbstractOTP implements OTP {
 
     // TODO:配置文件设置算法、口令长度等
     private String algorithmName = "SHA1";
